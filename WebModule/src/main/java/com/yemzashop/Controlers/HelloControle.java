@@ -12,7 +12,6 @@ import io.swagger.annotations.Tag;
 @CrossOrigin("*")
 @Api(value = "TestController", tags = { "Test Controller" })
 @SwaggerDefinition(tags = { @Tag(name = "Test Controller", description = "Write description here") })
-
 @RestController
 public class HelloControle {
 	
