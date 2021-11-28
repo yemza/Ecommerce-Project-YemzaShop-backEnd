@@ -43,6 +43,10 @@ public class ClientEntityDAO {
 	
     @OneToMany(mappedBy = "clientEntityDAO", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<OrderEntityDAO> orderEntityDAO = new ArrayList<>();
+    
+	@OneToOne(mappedBy="client")
+	private BasketEntityDAO basketEntityDAO;
+	
 	
 public ClientEntityDAO() {
 	// TODO Auto-generated constructor stub
