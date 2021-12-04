@@ -14,16 +14,16 @@ public class BasketEntityDAO {
 
 	
 	@Id
-	@SequenceGenerator(name = "SEQ_GEN", sequenceName = "SEQ_USER", allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_GEN")
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQ_GEN")
 	private Long id ;
 	private Long quantity;
 	
     @OneToOne
 	private ProductEntityDAO product;
 	 
+
     @OneToOne
-    private ClientEntityDAO client;
+    private UserEntityDAO user;
     
     
 	public BasketEntityDAO() {
@@ -31,13 +31,22 @@ public class BasketEntityDAO {
 	}
 
 
-	public BasketEntityDAO(Long id, Long quantity, ProductEntityDAO product, ClientEntityDAO client) {
+	
+
+
+
+
+
+	public BasketEntityDAO(Long id, Long quantity, ProductEntityDAO product, UserEntityDAO user) {
 		super();
 		this.id = id;
 		this.quantity = quantity;
 		this.product = product;
-		this.client = client;
+		this.user = user;
 	}
+
+
+
 
 
 
@@ -91,17 +100,27 @@ public class BasketEntityDAO {
 
 
 
-	public ClientEntityDAO getClient() {
-		return client;
+
+
+
+	public UserEntityDAO getUser() {
+		return user;
 	}
 
 
 
 
 
-	public void setClient(ClientEntityDAO client) {
-		this.client = client;
+
+
+
+	public void setUser(UserEntityDAO user) {
+		this.user = user;
 	}
+
+
+
+
 
 
 
