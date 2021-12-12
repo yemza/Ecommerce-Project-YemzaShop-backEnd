@@ -59,7 +59,7 @@ public class UserEntityDAO {
 	private BasketEntityDAO basketEntityDAO;
 
 	@ManyToMany
-	@JoinTable( name = "T_Users_Roles_Associations",
+	@JoinTable( name = "Users_Role",
 	   joinColumns = @JoinColumn(name="idUser"),
 	   inverseJoinColumns = @JoinColumn( name = "idRole" ) )
 	private List<RoleEntityDAO> roles = new ArrayList<>();

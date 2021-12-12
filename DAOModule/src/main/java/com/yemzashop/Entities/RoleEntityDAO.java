@@ -3,16 +3,7 @@ package com.yemzashop.Entities;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-
+import javax.persistence.*;
 
 
 @Entity
@@ -27,11 +18,8 @@ public class RoleEntityDAO {
 	@Column(name = "RoleName")
 	private String RoleName;
 	
-	@ManyToMany
-    @JoinTable( name = "T_Users_Roles_Associations",
-		        joinColumns = @JoinColumn( name = "idRole" ),
-		        inverseJoinColumns = @JoinColumn( name = "idUser" ) )
-	    private List<UserEntityDAO> users = new ArrayList<>();
+	@ManyToMany(mappedBy = "roles")
+	private List<UserEntityDAO> users = new ArrayList<>();
 
 	public RoleEntityDAO() {
 	}
