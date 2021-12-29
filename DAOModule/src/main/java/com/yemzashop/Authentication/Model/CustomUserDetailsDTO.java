@@ -1,6 +1,7 @@
 package com.yemzashop.Authentication.Model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -8,6 +9,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.yemzashop.Entities.RoleEntityDAO;
+import com.yemzashop.Entities.UserEntityDAO;
+
+
 
 public class CustomUserDetailsDTO implements UserDetails,  Serializable{
 	
@@ -23,6 +27,18 @@ public class CustomUserDetailsDTO implements UserDetails,  Serializable{
 	private String jwtToken;
 	
 	
+	
+	public CustomUserDetailsDTO(UserEntityDAO user) {		
+		this.authorities = new ArrayList<>(); 
+		this.idUser = user.getId();
+		this.userName = user.getUsername();
+		this.firstName = user.getFirstName();
+		this.lastName = user.getLastName();
+		this.userRoles = user.getRoles();
+		this.password = user.getPassword();
+		this.email = user.getEmail();
+		this.jwtToken = jwtToken;
+	} 
 	
 	
 	
@@ -116,22 +132,22 @@ public class CustomUserDetailsDTO implements UserDetails,  Serializable{
 	@Override
 	public boolean isAccountNonExpired() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 	@Override
 	public boolean isAccountNonLocked() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 	@Override
 	public boolean isCredentialsNonExpired() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 	@Override
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 	
 	

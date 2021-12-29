@@ -1,7 +1,8 @@
-package com.yemzashop.Models;
+package com.yemzashop.Authentication.Model;
 
 public class JwtResponse {
 	
+	private Long idUser;
 	private String jwtToken;
 
 	
@@ -10,9 +11,20 @@ public class JwtResponse {
 	}
 
 
-	public JwtResponse(String jwtToken) {
+	public JwtResponse(Long idUser, String jwtToken) {
 		super();
+		this.idUser = idUser;
 		this.jwtToken = jwtToken;
+	}
+
+
+	public Long getIdUser() {
+		return idUser;
+	}
+
+
+	public void setIdUser(Long idUser) {
+		this.idUser = idUser;
 	}
 
 
@@ -24,6 +36,7 @@ public class JwtResponse {
 	public void setJwtToken(String jwtToken) {
 		this.jwtToken = jwtToken;
 	}
-	
+
+
 	
 }

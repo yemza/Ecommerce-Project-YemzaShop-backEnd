@@ -1,4 +1,4 @@
-package com.yemzashop.Models;
+package com.yemzashop.Authentication.Model;
 
 public class JwtRequest {
 
