@@ -18,102 +18,41 @@ public class CustomUserDetailsDTO implements UserDetails,  Serializable{
 	private static final long serialVersionUID = 1L; 
 	private Collection<? extends GrantedAuthority> authorities;
 	private Long idUser;
-	private String userName;
+	private String username;
 	private String firstName;
 	private String lastName;
 	private List<RoleEntityDAO> userRoles ;
 	private String password;
 	private String email;
-	private String jwtToken;
 	
 	
+	public CustomUserDetailsDTO(Collection<? extends GrantedAuthority> authorities, Long idUser, String username,
+			String firstName, String lastName, List<RoleEntityDAO> userRoles, String password, String email) {
+		super();
+		this.authorities = authorities;
+		this.idUser = idUser;
+		this.username = username;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.userRoles = userRoles;
+		this.password = password;
+		this.email = email;
+	}
 	
+
 	public CustomUserDetailsDTO(UserEntityDAO user) {		
 		this.authorities = new ArrayList<>(); 
 		this.idUser = user.getId();
-		this.userName = user.getUsername();
+		this.username = user.getUsername();
 		this.firstName = user.getFirstName();
 		this.lastName = user.getLastName();
 		this.userRoles = user.getRoles();
 		this.password = user.getPassword();
 		this.email = user.getEmail();
-		this.jwtToken = jwtToken;
 	} 
 	
 	
 	
-	public CustomUserDetailsDTO(Collection<? extends GrantedAuthority> authorities, Long idUser, String userName,
-			String firstName, String lastName, List<RoleEntityDAO> userRoles, String password, String email ,String jwtToken) {
-		super();
-		this.authorities = authorities;
-		this.idUser = idUser;
-		this.userName = userName;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.userRoles = userRoles;
-		this.password = password;
-		this.email = email;
-		this.jwtToken = jwtToken;
-	}
-	
-	
-	
-	
-	public Long getIdUser() {
-		return idUser;
-	}
-	public void setIdUser(Long idUser) {
-		this.idUser = idUser;
-	}
-	public String getUserName() {
-		return userName;
-	}
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-	public String getFirstName() {
-		return firstName;
-	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-	public String getLastName() {
-		return lastName;
-	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-	public List<RoleEntityDAO> getUserRoles() {
-		return userRoles;
-	}
-	public void setUserRoles(List<RoleEntityDAO> userRoles) {
-		this.userRoles = userRoles;
-	}
-	public String getJwtToken() {
-		return jwtToken;
-	}
-	public void setJwtToken(String jwtToken) {
-		this.jwtToken = jwtToken;
-	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-	public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
-		this.authorities = authorities;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
@@ -121,13 +60,11 @@ public class CustomUserDetailsDTO implements UserDetails,  Serializable{
 	}
 	@Override
 	public String getPassword() {
-		// TODO Auto-generated method stub
-		return this.password;
+		return password;
 	}
 	@Override
 	public String getUsername() {
-		// TODO Auto-generated method stub
-		return this.userName;
+		return username;
 	}
 	@Override
 	public boolean isAccountNonExpired() {
@@ -150,6 +87,53 @@ public class CustomUserDetailsDTO implements UserDetails,  Serializable{
 		return true;
 	}
 	
+	
+	
+	public Long getIdUser() {
+		return idUser;
+	}
+	public void setIdUser(Long idUser) {
+		this.idUser = idUser;
+	}
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	public List<RoleEntityDAO> getUserRoles() {
+		return userRoles;
+	}
+	public void setUserRoles(List<RoleEntityDAO> userRoles) {
+		this.userRoles = userRoles;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
+		this.authorities = authorities;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	
+	
+	
+	
+
 	
 	
 	

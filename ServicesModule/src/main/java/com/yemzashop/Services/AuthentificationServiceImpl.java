@@ -20,26 +20,14 @@ import com.yemzashop.Repository.UserEntityDAORepository;
 
 
 @Service
-public class AuthentificationServiceImpl implements AuthentificationService , UserDetailsService {
+public class AuthentificationServiceImpl implements  UserDetailsService {
 	
 	@Autowired
 	private UserEntityDAORepository  userEntityDAORepository;
 
-	@Autowired
-    private AuthenticationManager authenticationManager;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		UserEntityDAO user = userEntityDAORepository.findByUsername(username);
-		if (user == null) {
-			System.out.println("User Login not found : {}" + username);
-			return null;
-		}
-		return new CustomUserDetailsDTO(user);
-	}
-
-	@Override
-	public CustomUserDetailsDTO authUser(String username, String password) {
 		
 //		 for (UserEntityDAO userEntity : userEntityDAORepository.findAll()) 
 //			{
@@ -49,15 +37,26 @@ public class AuthentificationServiceImpl implements AuthentificationService , Us
 //
 //			}
 //		
-	
-	final Authentication authentication = authenticationManager.authenticate(
-			new UsernamePasswordAuthenticationToken(username,password)	
-			);
-	SecurityContextHolder.getContext().setAuthentication(authentication);
-	final CustomUserDetailsDTO userDetails = (CustomUserDetailsDTO) loadUserByUsername(username);
-	return userDetails;
+		UserEntityDAO user = userEntityDAORepository.findByUsername(username);
+		if (user == null) {
+			System.out.println("User Login not found : {}" + username);
+			return null;
+		}
+		return new CustomUserDetailsDTO(user);
 	}
-	
+
+//	@Override
+//	public CustomUserDetailsDTO authUser(String username, String password) {
+//		
+//
+//	final Authentication authentication = authenticationManager.authenticate(
+//			new UsernamePasswordAuthenticationToken(username,password)	
+//			);
+//	SecurityContextHolder.getContext().setAuthentication(authentication);
+//	final CustomUserDetailsDTO userDetails = (CustomUserDetailsDTO) loadUserByUsername(username);
+//	return userDetails;
+//	}
+//	
 	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
