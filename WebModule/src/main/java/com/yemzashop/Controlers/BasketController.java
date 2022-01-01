@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yemzashop.Entities.BasketEntityDAO;
@@ -33,7 +34,14 @@ public class BasketController {
 		return basketService.getAllClientBasket();
 	}
 	
-
+	// get Basket by User ID API
+	@GetMapping("/getBasketByIdUser")
+	public List<BasketEntityDAO> getBasketByIdUser(@RequestParam Long idUser) {
+		return basketService.getBasketByIdUser(idUser);
+	}
+	
+	
+	// save basket API
 	@PostMapping("/addBasket")
 	public BasketEntityDAO addBasket(@RequestBody BasketEntityDAO myBasket) {
 		return basketService.addBasket(myBasket);

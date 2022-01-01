@@ -28,6 +28,13 @@ public class BasketServiceImpl  implements BasketService {
 		return basketEntityDAORepository.save(myBasket);
 	}
 
+
+
+	@Override
+	public List<BasketEntityDAO> getBasketByIdUser(Long idUser) {
+		return basketEntityDAORepository.findAllByUserId(idUser);
+	}
+
 	
 	
 	

@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -18,24 +20,19 @@ public class BasketEntityDAO {
 	private Long id ;
 	private Long quantity;
 	
-    @OneToOne
+    @ManyToOne
+    @JoinColumn( name="idProduct" )
 	private ProductEntityDAO product;
 	 
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn( name="idUser" )
     private UserEntityDAO user;
     
     
 	public BasketEntityDAO() {
 		// TODO Auto-generated constructor stub
 	}
-
-
-	
-
-
-
-
 
 	public BasketEntityDAO(Long id, Long quantity, ProductEntityDAO product, UserEntityDAO user) {
 		super();

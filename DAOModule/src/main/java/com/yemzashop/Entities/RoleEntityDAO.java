@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name="role")
@@ -19,6 +21,7 @@ public class RoleEntityDAO {
 	private String RoleName;
 	
 	@ManyToMany(mappedBy = "roles")
+	@JsonIgnore
 	private List<UserEntityDAO> users = new ArrayList<>();
 
 	public RoleEntityDAO() {

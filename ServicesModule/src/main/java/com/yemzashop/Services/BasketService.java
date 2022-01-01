@@ -10,5 +10,7 @@ public interface BasketService {
 
 	BasketEntityDAO addBasket(BasketEntityDAO myBasket);
 
+	List<BasketEntityDAO> getBasketByIdUser(Long idUser);
+
 
 }

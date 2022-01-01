@@ -17,6 +17,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name = "user")
@@ -42,6 +44,7 @@ public class UserEntityDAO {
 	private String email  ;
 	
 	@Column(name = "password")
+	@JsonIgnore
 	private String password  ;
 	
 	@Column(name = "phone")
@@ -53,10 +56,12 @@ public class UserEntityDAO {
 	
     @OneToMany(mappedBy = "userEntityDAO", 
     		   cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @JsonIgnore
     private List<OrderEntityDAO> orderEntityDAO = new ArrayList<>();
     
-	@OneToOne(mappedBy="user")
-	private BasketEntityDAO basketEntityDAO;
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+	private List<BasketEntityDAO> basketEntityDAO;
 
 	@ManyToMany
 	@JoinTable( name = "Users_Role",
@@ -69,7 +74,7 @@ public class UserEntityDAO {
 
 	public UserEntityDAO(Long id, String firstName, String lastName, String username, String email, String password,
 			Long phone, AdresseEntityDAO adresseEntityDAO, List<OrderEntityDAO> orderEntityDAO,
-			BasketEntityDAO basketEntityDAO, List<RoleEntityDAO> roles) {
+			List<BasketEntityDAO> basketEntityDAO, List<RoleEntityDAO> roles) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -156,11 +161,11 @@ public class UserEntityDAO {
 		this.orderEntityDAO = orderEntityDAO;
 	}
 
-	public BasketEntityDAO getBasketEntityDAO() {
+	public List<BasketEntityDAO> getBasketEntityDAO() {
 		return basketEntityDAO;
 	}
 
-	public void setBasketEntityDAO(BasketEntityDAO basketEntityDAO) {
+	public void setBasketEntityDAO(List<BasketEntityDAO> basketEntityDAO) {
 		this.basketEntityDAO = basketEntityDAO;
 	}
 
@@ -171,6 +176,7 @@ public class UserEntityDAO {
 	public void setRoles(List<RoleEntityDAO> roles) {
 		this.roles = roles;
 	}
+
 	
 	
 	 

@@ -19,6 +19,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name = "products")
@@ -56,11 +58,13 @@ public class ProductEntityDAO {
 	private Set<ProductImages> productImages;
 	
 	@OneToMany(mappedBy = "productEntityDAO", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+	@JsonIgnore
 	List<OrderDetailsEntityDAO> orderDetails  = new ArrayList<>();
 
-
-	@OneToOne(mappedBy="product")
-	private BasketEntityDAO basketEntityDAO;
+	
+    @OneToMany(mappedBy = "product")
+    @JsonIgnore 
+	private List<BasketEntityDAO> basketEntityDAO;
 	
 	public ProductEntityDAO() {
 		// TODO Auto-generated constructor stub
