@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -40,10 +41,26 @@ public class BasketController {
 		return basketService.getBasketByIdUser(idUser);
 	}
 	
+	// get number of Product in Basket of the user
+	@GetMapping("/getListBasketLenght")
+	public int getListBasketLenght(@RequestParam Long idUser) {
+		return basketService.getListBasketLenght(idUser);
+	}
+	
 	
 	// save basket API
 	@PostMapping("/addBasket")
 	public BasketEntityDAO addBasket(@RequestBody BasketEntityDAO myBasket) {
 		return basketService.addBasket(myBasket);
 	}
+	
+	// get Basket by User ID API
+	@DeleteMapping("/deleteProductFromBasket")
+	public void deleteProductFromBasketById(@RequestParam Long idBaskest) {
+		basketService.deleteProductFromBasketById(idBaskest);
+	}
+	
+	
+	
+	
 }
