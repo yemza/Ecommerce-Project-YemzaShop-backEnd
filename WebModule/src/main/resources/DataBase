@@ -1,0 +1,383 @@
+CREATE DATABASE  IF NOT EXISTS `yemzashop2` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */;
+USE `yemzashop2`;
+-- MySQL dump 10.13  Distrib 8.0.26, for Win64 (x86_64)
+--
+-- Host: 127.0.0.1    Database: yemzashop2
+-- ------------------------------------------------------
+-- Server version	8.0.12
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `adresses`
+--
+
+DROP TABLE IF EXISTS `adresses`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `adresses` (
+  `id` bigint(20) NOT NULL,
+  `city` varchar(255) DEFAULT NULL,
+  `country` varchar(255) DEFAULT NULL,
+  `line1` varchar(255) DEFAULT NULL,
+  `line2` varchar(255) DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `pin_code` varchar(255) DEFAULT NULL,
+  `state` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `adresses`
+--
+
+LOCK TABLES `adresses` WRITE;
+/*!40000 ALTER TABLE `adresses` DISABLE KEYS */;
+/*!40000 ALTER TABLE `adresses` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `basket`
+--
+
+DROP TABLE IF EXISTS `basket`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `basket` (
+  `id` bigint(20) NOT NULL,
+  `quantity` bigint(20) DEFAULT NULL,
+  `client_id` bigint(20) DEFAULT NULL,
+  `product_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKpsbpg5lc7uk06uixvl9ehdkvt` (`product_id`),
+  KEY `FKohsa6lo6ck40h4lw0iqqyfhsq` (`client_id`),
+  CONSTRAINT `FKc7lbw0g22l466v106qxpl3x1m` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`),
+  CONSTRAINT `FKohsa6lo6ck40h4lw0iqqyfhsq` FOREIGN KEY (`client_id`) REFERENCES `user` (`id`),
+  CONSTRAINT `FKpsbpg5lc7uk06uixvl9ehdkvt` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `basket`
+--
+
+LOCK TABLES `basket` WRITE;
+/*!40000 ALTER TABLE `basket` DISABLE KEYS */;
+INSERT INTO `basket` VALUES (1,1,NULL,2);
+/*!40000 ALTER TABLE `basket` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `categories`
+--
+
+DROP TABLE IF EXISTS `categories`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `categories` (
+  `id` bigint(20) NOT NULL,
+  `ctegory_name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `categories`
+--
+
+LOCK TABLES `categories` WRITE;
+/*!40000 ALTER TABLE `categories` DISABLE KEYS */;
+INSERT INTO `categories` VALUES (1,'Electronics'),(2,'Shoes');
+/*!40000 ALTER TABLE `categories` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `cities`
+--
+
+DROP TABLE IF EXISTS `cities`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `cities` (
+  `id` bigint(20) NOT NULL,
+  `name_city` varchar(255) DEFAULT NULL,
+  `cities` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKkjig1m12lk4auj6ws12jh8n3m` (`cities`),
+  CONSTRAINT `FKkjig1m12lk4auj6ws12jh8n3m` FOREIGN KEY (`cities`) REFERENCES `countries` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cities`
+--
+
+LOCK TABLES `cities` WRITE;
+/*!40000 ALTER TABLE `cities` DISABLE KEYS */;
+/*!40000 ALTER TABLE `cities` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `clients`
+--
+
+DROP TABLE IF EXISTS `clients`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `clients` (
+  `id` bigint(20) NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `first_name` varchar(255) DEFAULT NULL,
+  `last_name` varchar(255) DEFAULT NULL,
+  `phone` bigint(20) DEFAULT NULL,
+  `adresse_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKnuiomlj8xggb08uytroe2luo2` (`adresse_id`),
+  CONSTRAINT `FKnuiomlj8xggb08uytroe2luo2` FOREIGN KEY (`adresse_id`) REFERENCES `adresses` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `clients`
+--
+
+LOCK TABLES `clients` WRITE;
+/*!40000 ALTER TABLE `clients` DISABLE KEYS */;
+/*!40000 ALTER TABLE `clients` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `countries`
+--
+
+DROP TABLE IF EXISTS `countries`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `countries` (
+  `id` bigint(20) NOT NULL,
+  `name_contry` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `countries`
+--
+
+LOCK TABLES `countries` WRITE;
+/*!40000 ALTER TABLE `countries` DISABLE KEYS */;
+/*!40000 ALTER TABLE `countries` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `order_details`
+--
+
+DROP TABLE IF EXISTS `order_details`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `order_details` (
+  `id` bigint(20) NOT NULL,
+  `quantity` bigint(20) DEFAULT NULL,
+  `order_id` bigint(20) DEFAULT NULL,
+  `client_id` bigint(20) DEFAULT NULL,
+  `product_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKjyu2qbqt8gnvno9oe9j2s2ldk` (`order_id`),
+  KEY `FK4q98utpd73imf4yhttm3w0eax` (`product_id`),
+  CONSTRAINT `FK4q98utpd73imf4yhttm3w0eax` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
+  CONSTRAINT `FKjyu2qbqt8gnvno9oe9j2s2ldk` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `order_details`
+--
+
+LOCK TABLES `order_details` WRITE;
+/*!40000 ALTER TABLE `order_details` DISABLE KEYS */;
+/*!40000 ALTER TABLE `order_details` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `orders`
+--
+
+DROP TABLE IF EXISTS `orders`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `orders` (
+  `id` bigint(20) NOT NULL,
+  `client_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKqjej6f6f4lfkvn81oyg60aieu` (`client_id`),
+  CONSTRAINT `FKm2dep9derpoaehshbkkatam3v` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`),
+  CONSTRAINT `FKqjej6f6f4lfkvn81oyg60aieu` FOREIGN KEY (`client_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `orders`
+--
+
+LOCK TABLES `orders` WRITE;
+/*!40000 ALTER TABLE `orders` DISABLE KEYS */;
+/*!40000 ALTER TABLE `orders` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `products`
+--
+
+DROP TABLE IF EXISTS `products`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `products` (
+  `id` bigint(20) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `images` varchar(255) DEFAULT NULL,
+  `price` varchar(255) DEFAULT NULL,
+  `quantity` varchar(255) DEFAULT NULL,
+  `short_desc` varchar(255) DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `category_id` bigint(20) NOT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKog2rp4qthbtt2lfyhfo32lsw9` (`category_id`),
+  CONSTRAINT `FKog2rp4qthbtt2lfyhfo32lsw9` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `products`
+--
+
+LOCK TABLES `products` WRITE;
+/*!40000 ALTER TABLE `products` DISABLE KEYS */;
+INSERT INTO `products` VALUES (1,'With PS4, gaming becomes a lot more power packed. Ultra-fast processors, high-performance system, real-time game sharing, remote play and lots more makes it the ultimate companion device.','../../../../../assets/images/mockup-fc750eaa.jpg','5.20','100','They exist!','The Unicorn',1,'../../../../../assets/images/mockup-fc750eaa.jpg'),(2,'The Nike Zoom Pegasus Turbo 2 is updated with a feather-light upper, while innovative foam brings revolutionary responsiveness to your long-distance training','../../../../../assets/images/mockup-6aeffeca.jpg','5.20','100','You know he\'s got his own personal stylist.','The Fashionista',1,'../../../../../assets/images/mockup-6aeffeca.jpg'),(3,'Look at that crazy and cute face!','../../../../../assets/images/mockup-de719380.jpg','5.20','100','Look at that crazy and cute face!','The Drooler',1,'../../../../../assets/images/mockup-de719380.jpg'),(4,'Public enemy No. 1','../../../../../assets/images/mockup-f7e1805f.jpg','5.20','100','Public enemy No. 1','The Pee-er',1,'../../../../../assets/images/mockup-f7e1805f.jpg'),(5,'No surprise courage and him are best friends.','../../../../../assets/images/mockup-306a1416.jpg','5.20','100','No surprise courage and him are best friends.','Scaredy Dog',1,'../../../../../assets/images/mockup-306a1416.jpg'),(6,'Catch this sticker today!','../../../../../assets/images/mockup-954d2eff.jpg','5.20','100','Catch this sticker today!','The Player',1,'../../../../../assets/images/mockup-954d2eff.jpg'),(7,'Let\'s just say a lot of bones were broken...and chewed on.','../../../../../assets/images/mockup-be79c598.jpg','5.20','100','Let\'s just say a lot of bones were broken...and chewed on.','The Brawl',1,'../../../../../assets/images/mockup-be79c598.jpg'),(8,'So sneaky...','../../../../../assets/images/mockup-52c49241.jpg','5.20','100','So sneaky...','Tip Toe Pub',1,'../../../../../assets/images/mockup-52c49241.jpg'),(9,'Scrub em clean!','../../../../../assets/images/mockup-a979a43d.jpg','5.20','100','Scrub em clean!','Dog Bath',1,'../../../../../assets/images/mockup-a979a43d.jpg');
+/*!40000 ALTER TABLE `products` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `products_images`
+--
+
+DROP TABLE IF EXISTS `products_images`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `products_images` (
+  `id` bigint(20) NOT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `productid` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKsfcl3l6pkmff275o2ihvth6w3` (`productid`),
+  CONSTRAINT `FKsfcl3l6pkmff275o2ihvth6w3` FOREIGN KEY (`productid`) REFERENCES `products` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `products_images`
+--
+
+LOCK TABLES `products_images` WRITE;
+/*!40000 ALTER TABLE `products_images` DISABLE KEYS */;
+INSERT INTO `products_images` VALUES (1,'../../../../../assets/images/product1.jpg',2),(2,'../../../../../assets/images/product2.jpg',2),(3,'../../../../../assets/images/product3.jpg',2),(4,'../../../../../assets/images/product4.jpg',2);
+/*!40000 ALTER TABLE `products_images` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `seq_gen`
+--
+
+DROP TABLE IF EXISTS `seq_gen`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `seq_gen` (
+  `next_val` bigint(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `seq_gen`
+--
+
+LOCK TABLES `seq_gen` WRITE;
+/*!40000 ALTER TABLE `seq_gen` DISABLE KEYS */;
+INSERT INTO `seq_gen` VALUES (1);
+/*!40000 ALTER TABLE `seq_gen` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `seq_user`
+--
+
+DROP TABLE IF EXISTS `seq_user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `seq_user` (
+  `next_val` bigint(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `seq_user`
+--
+
+LOCK TABLES `seq_user` WRITE;
+/*!40000 ALTER TABLE `seq_user` DISABLE KEYS */;
+INSERT INTO `seq_user` VALUES (2);
+/*!40000 ALTER TABLE `seq_user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user`
+--
+
+DROP TABLE IF EXISTS `user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `user` (
+  `dtype` varchar(31) NOT NULL,
+  `id` bigint(20) NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `first_name` varchar(255) DEFAULT NULL,
+  `last_name` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `role` varchar(255) DEFAULT NULL,
+  `phone` bigint(20) DEFAULT NULL,
+  `adresse_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK5e6f4x020ejdgxs9vgorbrqad` (`adresse_id`),
+  CONSTRAINT `FK5e6f4x020ejdgxs9vgorbrqad` FOREIGN KEY (`adresse_id`) REFERENCES `adresses` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user`
+--
+
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2022-06-30 19:01:23
