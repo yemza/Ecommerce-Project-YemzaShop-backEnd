@@ -18,14 +18,12 @@ import java.util.*;
 public class OrderEntityDAO {
 	
 	@Id
-	@SequenceGenerator(name = "SEQ_GEN", sequenceName = "SEQ_USER", allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_GEN")
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQ_GEN")
 	private Long id ;
 	
-	
-	 @ManyToOne
-	 @JoinColumn(name="clientId",  insertable = false, updatable = false)
-	 private ClientEntityDAO clientEntityDAO;
+	@ManyToOne
+	@JoinColumn(name="userId",  insertable = false, updatable = false)
+	private UserEntityDAO userEntityDAO;
 
     @OneToMany(mappedBy = "orderEntityDAO", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     List<OrderDetailsEntityDAO> orderDetails  = new ArrayList<>();
@@ -36,12 +34,16 @@ public class OrderEntityDAO {
 	}
 
 
-	public OrderEntityDAO(Long id, ClientEntityDAO clientEntityDAO, List<OrderDetailsEntityDAO> orderDetails) {
+	
+
+
+	public OrderEntityDAO(Long id, UserEntityDAO userEntityDAO, List<OrderDetailsEntityDAO> orderDetails) {
 		super();
 		this.id = id;
-		this.clientEntityDAO = clientEntityDAO;
+		this.userEntityDAO = userEntityDAO;
 		this.orderDetails = orderDetails;
 	}
+
 
 
 	public Long getId() {
@@ -54,14 +56,22 @@ public class OrderEntityDAO {
 	}
 
 
-	public ClientEntityDAO getClientEntityDAO() {
-		return clientEntityDAO;
+
+
+	public UserEntityDAO getUserEntityDAO() {
+		return userEntityDAO;
 	}
 
 
-	public void setClientEntityDAO(ClientEntityDAO clientEntityDAO) {
-		this.clientEntityDAO = clientEntityDAO;
+
+
+
+	public void setUserEntityDAO(UserEntityDAO userEntityDAO) {
+		this.userEntityDAO = userEntityDAO;
 	}
+
+
+
 
 
 	public List<OrderDetailsEntityDAO> getOrderDetails() {

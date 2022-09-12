@@ -10,5 +10,11 @@ public interface BasketService {
 
 	BasketEntityDAO addBasket(BasketEntityDAO myBasket);
 
+	List<BasketEntityDAO> getBasketByIdUser(Long idUser);
+
+	void deleteProductFromBasketById(Long idBaskest);
+
+	int getListBasketLenght(Long idUser);
+
 
 }

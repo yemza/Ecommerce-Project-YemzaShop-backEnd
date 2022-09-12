@@ -13,20 +13,22 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "categories")
 
 public class CategoryEntityDAO {
 
 	@Id
-	@SequenceGenerator(name = "SEQ_GEN", sequenceName = "SEQ_USER", allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_GEN")
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQ_GEN")
 	   private Long id;
 	   
 	   @Column(name = "ctegoryName")
 	   private String categoryName;
 	   
 	   @OneToMany(mappedBy = "categoryEntityDAO", cascade = CascadeType.ALL)
+	   @JsonIgnore
 	   private Set<ProductEntityDAO> productEntityDAO = new HashSet<ProductEntityDAO>(); 
 	   
 	   public CategoryEntityDAO() {

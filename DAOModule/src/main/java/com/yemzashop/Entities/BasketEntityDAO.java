@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -14,30 +16,34 @@ public class BasketEntityDAO {
 
 	
 	@Id
-	@SequenceGenerator(name = "SEQ_GEN", sequenceName = "SEQ_USER", allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_GEN")
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQ_GEN")
 	private Long id ;
 	private Long quantity;
 	
-    @OneToOne
+    @ManyToOne
+    @JoinColumn( name="idProduct" )
 	private ProductEntityDAO product;
 	 
-    @OneToOne
-    private ClientEntityDAO client;
+
+    @ManyToOne
+    @JoinColumn( name="idUser" )
+    private UserEntityDAO user;
     
     
 	public BasketEntityDAO() {
 		// TODO Auto-generated constructor stub
 	}
 
-
-	public BasketEntityDAO(Long id, Long quantity, ProductEntityDAO product, ClientEntityDAO client) {
+	public BasketEntityDAO(Long id, Long quantity, ProductEntityDAO product, UserEntityDAO user) {
 		super();
 		this.id = id;
 		this.quantity = quantity;
 		this.product = product;
-		this.client = client;
+		this.user = user;
 	}
+
+
+
 
 
 
@@ -91,17 +97,27 @@ public class BasketEntityDAO {
 
 
 
-	public ClientEntityDAO getClient() {
-		return client;
+
+
+
+	public UserEntityDAO getUser() {
+		return user;
 	}
 
 
 
 
 
-	public void setClient(ClientEntityDAO client) {
-		this.client = client;
+
+
+
+	public void setUser(UserEntityDAO user) {
+		this.user = user;
 	}
+
+
+
+
 
 
 

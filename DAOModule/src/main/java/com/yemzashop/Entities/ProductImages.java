@@ -13,8 +13,7 @@ import javax.persistence.Table;
 public class ProductImages {
 	
 	@Id
-	@SequenceGenerator(name = "SEQ_GEN", sequenceName = "SEQ_USER", allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_GEN")
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQ_GEN")
 	private Long  id ;
 	
 	@Column(name = "image")
