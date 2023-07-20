@@ -24,8 +24,11 @@ public class CategoryEntityDAO {
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQ_GEN")
 	   private Long id;
 	   
-	   @Column(name = "ctegoryName")
+	   @Column(name = "category_name")
 	   private String categoryName;
+
+		@Column(name = "image_category")
+		private String imageCategory;
 	   
 	   @OneToMany(mappedBy = "categoryEntityDAO", cascade = CascadeType.ALL)
 	   @JsonIgnore
@@ -61,8 +64,13 @@ public class CategoryEntityDAO {
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
 	}
-	   
-	   
-	
-	
+
+
+	public String getImageCategory() {
+		return imageCategory;
+	}
+
+	public void setImageCategory(String imageCategory) {
+		this.imageCategory = imageCategory;
+	}
 }
